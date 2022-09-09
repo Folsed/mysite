@@ -1,0 +1,6 @@
+Для запуска сайта нужно:
+1)Ввести свой API key в:      
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&v=weekly"defer></script>
+
+2)В терминале ввести python manage.py runserver
+

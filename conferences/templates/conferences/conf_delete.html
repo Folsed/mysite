@@ -1,0 +1,13 @@
+{% extends 'conferences/layout.html' %}
+
+{% block title %}Delete conf{% endblock %}
+    
+{% block content %}
+    <div class="features" enctype="multipart/form-data">
+        <h1>Delete conference</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button class="button2 button-new" type="submit">Delete</button>
+        </form>
+    </div>
+{% endblock %}

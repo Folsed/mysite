@@ -1,0 +1,15 @@
+{% extends 'conferences/layout.html' %}
+
+{% block title %}Our conferences{% endblock %}
+    
+{% block content %}
+    <div class="features">
+        <h1>Our conferences</h1>
+        {% for items in conferences %}
+            <div class="alert alert-secondary">
+                <h3>{{ items.title }}</h3>
+                <p>{{ items.date }}</p>
+                <a href="{% url 'conf_detail' items.id %}" class="button2 button-new">More...</a>
+            </div>
+        {% endfor %}
+{% endblock %}

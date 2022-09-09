@@ -1,0 +1,74 @@
+{% extends 'conferences/layout.html' %}
+
+{% block title %}{{ objectkey.title }}{% endblock %}
+    
+{% block content %}
+    <div class="features1">
+        <h1>{{ objectkey.title }}</h1>
+        <h2>
+            <span style="font-size:25px; color:rgb(168, 168, 233); text-transform:capitalize;">
+                Date:
+            </span>
+            <span style="font-size:25px; text-transform:capitalize;">
+                {{ objectkey.date }}
+            </span>
+        </h2>
+        <h2>
+            <span style="font-size:25px; color:rgb(168, 168, 233); text-transform:capitalize;">
+                Latitude:
+            </span>
+            <span style="font-size:25px; text-transform:capitalize;">
+                {{ objectkey.lat }}
+            </span>
+        </h2>
+        <h2>
+            <span style="font-size:25px; color:rgb(168, 168, 233); text-transform:capitalize;">
+                Longitude:
+            </span>
+            <span style="font-size:25px; text-transform:capitalize;">
+                {{ objectkey.lng }}
+            </span>
+        </h2>
+        <div id="map"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANmbyl-_xaugnB-VCS5gmD9SIMRTqwhpo&callback=initMap&v=weekly"defer></script>
+            <script>
+                let map;
+                function initMap(){
+                    lat = parseFloat({{ objectkey.lat }});
+                    lng = parseFloat({{ objectkey.lng }});
+                    const myLatLng = {lat: lat, lng: lng};
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: myLatLng,
+                        zoom: 8,
+                    });
+                    new google.maps.Marker({
+                        position: myLatLng,
+                        map,
+                        title: "{{ objectkey.country }}",
+                    });
+                }
+                window.initMap = initMap;
+            </script>
+            <style type="text/css">
+                #map {
+                    position: relative;
+                    bottom: -5px;
+                    left: -6px;
+                    height: 350px;
+                    width: 500px;
+                    margin-top: 0px;
+                    margin-bottom: 10px;
+                }
+            </style>
+        <h2>
+            <span style="font-size:25px; color:rgb(168, 168, 233); text-transform:capitalize;">
+                Country:
+            </span>
+            <span style="font-size:25px; text-transform:capitalize;">
+                {{ objectkey.country }}
+            </span>
+        </h2>
+        <a href="{% url 'conf_edit' objectkey.id %}" class="button2 button-new">Edit</a>
+        <a href="{% url 'conf_delete' objectkey.id %}" class="button2 button-new">Delete</a>
+    </div>
+{% endblock %}
